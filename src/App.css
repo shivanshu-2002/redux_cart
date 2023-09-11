@@ -1,82 +1,54 @@
-main {
-  height:100vh;
-  width:100vw;
-  background-color:cyan;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.container{
+    width: 100vw;
+    height: auto;
+    background-color: rgb(187, 100, 241);
 }
-.card{
-     background-color:white;
-     width:20%;
-     height:30%;
-   display:flex;
-  border-radius:10px;
-  flex-direction:column;
-  padding:7px;
-  align-items:center;
+.heading{
+      background-color: rgb(187, 124, 218);
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 3px solid white;
 }
-
-.name{
-  font-size:19px;
-     color:purple;
-     padding:5px;
-  font-family:verdana;
-  font-weight:bold;
-  margin:5px;
+.text{
+     padding: 10px;
+     font-size: 30px;
+     font-weight: 700;
+     font-family: calibri;
+     background-color: rgb(251, 251, 251);
+     width: 30%;
+     border-radius: 30px;
+     border: 3px dashed black;
 }
-.counter{
-   display:flex;
-  margin:10px;
-   justify-content:space-between;
-    background-color:cyan;
-   padding:10px;
-  border-radius:5px;
-   width:80%;
+.card_area{
+      height: auto;
+      display: flex;
+      justify-content: center;
 }
-.minus{
-   width:25%;
-  border-radius:5px;
-  background-color:purple;
-   color:black;
-   font-size:20px;
-    font-weight:bold;
-  cursor:pointer;
-   display:flex;
-   justify-content:center;
-   padding:5px;
+.empty{
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      margin-top: 80px;
+      align-items: center;
+      
 }
-.num{
-  width:25%;
-   padding:5px;
-   color:black;
-   font-size:20px;
-    font-weight:bold;
-    display:flex;
-   justify-content:center;
+h1{
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: white;
 }
-.plus{
-   display:flex;
-   justify-content:center;
-   border-radius:5px;
-   width:25%;
-   cursor:pointer;
-   background-color:purple;
-   padding:5px;
-   color:black;
-   font-size:20px;
-    font-weight:bold;
-}
-button{
-  width:100%;
-   padding:5px;
+.empty button{
+     padding: 10px;
+     font-size: 20px;
+     border-radius: 10px;
+     width: 30%;
 }
 
-.butt{
-   width:50%;
-     padding:5px;
-   margin:5px; 
-}
-.butt:hover{
-   background-color:cyan;
+.empty button:hover{
+      cursor: pointer;
+      background-color: blueviolet;
+      transition: 1s;
 }
