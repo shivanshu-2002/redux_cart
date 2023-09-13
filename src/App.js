@@ -1,40 +1,55 @@
-import { useState } from 'react';
 import './App.css';
-import CardArea from './components/CardArea';
-import sevenWondersData from './data';
+import { apiUrl, filterData } from "./data";
+import Cards from './components/Cards';
 
+import Filter from './components/Filter';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import Spinner from './components/Spinner'
+import Navbar from './components/Navbar';
 
 export default function App() {
-     const [data,setdata] = useState(sevenWondersData);
-     const removeCard = (id)=>{
-         const newArr = data.filter(data1 =>data1.id!=id);
-         setdata(newArr); 
-     }
-     const handleClick = ()=>{
-           setdata(sevenWondersData);
-     }
-
-   if(data.length ==0){
+      
+      const [courses, setCourses] = useState(null);
+      const [loading , setLoading]= useState(true);
+      const [category,setCategory] = useState(filterData[0].title)
+      useEffect(() => {
+            
+            const fetchData = async () => {
+                  setLoading(true);
+                  try {
+                        const res = await fetch(apiUrl)
+                        const data = await res.json();
+                        setCourses(data.data);
+                  }
+                  catch {
+                        toast.error("Something Went Wrong");
+                  }
+                  setLoading(false);
+            }
+            fetchData();
+      }, [])
       return (
-         <div className="container">
-          <div className="heading">
-            <div className='text'>Plan With Pandey </div> 
-          </div>
-          <div className='empty'>
-              <h1>No Tour Left!</h1>
-              <button onClick={handleClick}>Referesh</button>
-         </div>
-     </div>
+            <div className='min-h-screen flex flex-col bg-sky-900'>
+                  <div>
+                        <Navbar />
+                  </div>
+                  <div className='bg-sky-900'>
+                  <div >
+                  {console.log("HELlo")}
+                        <Filter
+                           category = {category}
+                           setCategory = {setCategory}
+                           filterData={filterData}
+                        />
+                  </div>
+                  <div className='w-11/12 max-w-[1200px]
+                     mx-auto flex flex-wrap justify-center items-center min-h-[50vh]'>
+                  {
+                        loading!=true ?  (<Cards apiData={courses} category={category}/>):(<Spinner/>) 
+                  }      
+                  </div>
+                  </div>
+            </div>
       )
-     }
-  return (
-     <div className="container">
-          <div className="heading">
-            <div className='text'>Plan With Pandey </div> 
-          </div>
-          <div className="card_area">
-             <CardArea data = {data} removefunc = {removeCard}></CardArea>
-          </div>
-     </div>
-  )
 }
