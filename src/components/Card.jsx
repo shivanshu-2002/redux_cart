@@ -1,59 +1,61 @@
-import React from 'react'
-import { FcLike ,FcLikePlaceholder} from "react-icons/fc"
-import { toast } from 'react-toastify';
-const Card = ({course ,Likedcourses,setLikedCourses}) => {
-   
-  const clickHandler = () => {
-    if (Likedcourses.includes(course.id)) {
-        setLikedCourses((prev) => prev.filter((cid) => cid !== course.id));
-        toast.warning("Like removed");
-    } else {
-        if (Likedcourses.length === 0) {
-            setLikedCourses([course.id]); // Wrap course.id in an array
-        } else {
-            setLikedCourses((prev) => [...prev, course.id]);
-        }
-        toast.success("Liked Successfully!");
-    }
-    console.log("hey", Likedcourses);
-};
+import React, { useState } from 'react'
+import dataVal from '../data'
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
+import Image from './Image';
+const Card = () => {
+    // let n = dataVal.length();
+    let n = 5;
+     const[index,setIndex] = useState(0);
+     const handleIncrease = ()=>{
+           setIndex((index+1)%n);
+     }
+     const handleDecrease =()=>{
+           if(index ==0)setIndex(n-1);
+           else setIndex(index-1);
+     }
+     
+     const randomHandler = ()=>{
+        console.log(Math.floor(Math.random() * (5)))
+           setIndex(Math.floor(Math.random() * (5)));
+     }
+    return (
+        <div className='parent bg-white w-[45%] h-[70%] rounded-lg shadow-xl'>
+            <Image url={dataVal[index].imageUrl} />
+            <div className='flex flex-col items-center justify-center'>
 
-  return (
-    <div className='w-[300px] bg-slate-600 bg-opacity-80 rounded-md overflow-hidden'>
-      <div className='relative'>
-        <img src={course.image.url}></img>
+                <div className='text-xl font-verdana font-bold'>{dataVal[index].name}</div>
 
-        <div className='w-[40px] h-[40px] bg-white rounded-full absolute right-2 bottom-2 grid place-items-center'>
-          <button onClick={clickHandler}>
-            {
-              Likedcourses.includes(course.id)?(
-                <FcLike fontSize="1.75rem" />
-              ):(
-                <FcLikePlaceholder fontSize="1.75rem"/>
-              )
-            }
-            
-            
-          </button>
+                <div className='text-slate-500 text-xs'>{dataVal[index].title}</div>
 
+                <div className='m-3 '>
+                    <FaQuoteLeft />
+                </div>
+
+                <div className='flex flex-col items-center justify-center '>
+                <div className='w-[75%]'>{dataVal[index].message}</div>
+                </div>
+
+                <div className='m-2'>
+                    <FaQuoteRight />
+                </div>
+
+                <div className='flex mt-2 text-3xl text-violet-500 font-bold text-center'>
+                    <button  className='cursor-pointer  hover:text-violet-800' onClick={handleDecrease}>
+                        <FiChevronLeft/>
+                    </button>
+                    <button className='cursor-pointer  hover:text-violet-800' onClick={handleIncrease}>
+                    <FiChevronRight/>
+                    </button>
+                </div>
+                <div className='p-2 mt-4 bg-purple-400 w-[30%] flex justify-center items-center rounded-md hover:bg-purple-500'>
+                    <button className='text-white text-lg font-bold' onClick={randomHandler}>
+                        Surprise Me
+                    </button>
+                </div>
+            </div>
         </div>
-
-      </div>
-      <div className='p-4'>
-        <p className='text-white font-semibold text-lg leading-6'>{course.title}</p>
-        <p className='text-white mt-2 '>
-        {
-           course.description.length>100?(
-            course.description.substr(0,100).concat('....')):
-            (course.description)
-        }
-       
-        </p>
-      </div>
-
-    </div>
-
-  )
+    )
 }
 
 export default Card
