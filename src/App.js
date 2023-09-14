@@ -1,96 +1,55 @@
-import { useState } from 'react';
+
+import { Link, NavLink, Route ,Routes} from 'react-router-dom';
 import './App.css';
+import Labs from './component/Labs';
+import Home from './component/Home';
+import About from './component/About';
+import Contact from './component/Contact';
+import Notfound from './component/Notfound'
+import MainHeader from './component/MainHeader';
+
 
 
 export default function App() {
-       const [formData,setFormData] = useState({firstname:"",Lastname:"",email:"",isVisible:true ,mode:"",favCar:""})
-       const changeHandler = (event)=>{
-          const {name,value,checked,type}  = event.target;
-            setFormData(prevState=>{
-                  return {
-                    ...prevState,
-                  [name]:type==='checkbox'?checked:value    //Specially added for the checkbox
-                  }
-            })
-       }
-       const submitHandler = (event)=>{
-        event.preventDefault();
-             console.log("Hello bhai Ram Ram ji Sareya ne!");
-             console.log(formData);
-       }
       return (
-        <div>
-              <form className=' mt-5 flex flex-col justify-center items-center' onSubmit={submitHandler}>
-                   <input type='text'
-                    placeholder='Enter name'
-                    name='firstname' 
-                    // name should be same as specified in useState
-                    onChange={changeHandler}
-                    value={formData.firstname}
-                    />
-                    <br/>
-                    <br/>
-                   <input type='text'
-                    placeholder='Enter Last name'
-                    name='Lastname'
-                    onChange={changeHandler}
-                    value={formData.Lastname} //yha pe is liye add krte hai taki component ko bhi apne state ka knowledge ho
-                    />
-                       <br/>
-                    <br/>
-                   <input type='email'
-                    placeholder='Enter email'
-                    name='email'
-                    onChange={changeHandler}
-                    value={formData.email}
-                    />
-                    {/* CHeck box */}
-                    <br/>
-                    <br/>
+         <div>
+         {/* Link Can be Used  */}
+           {/* <ul>
+            <li>
+            <Link to="/">Home</Link>
+            </li>
+            <li> <Link to="/about">About</Link></li>
+            <li> <Link to="/contact">Contact</Link></li>
+            <li> <Link to="/labs">labs</Link></li>
+           </ul> */}
+           {/* Alternate you can use Navlink  */}
+           <ul>
+            <li>
+            <NavLink to="/">Home</NavLink>
+            </li>
+            <li> <NavLink to="/about">About</NavLink></li>
+            <li> <NavLink to="/contact">Contact</NavLink></li>
+            <li> <NavLink to="/labs">labs</NavLink></li>
+           </ul>
 
-                   <input type='checkbox'
-                    name='isVisible'
-                    onChange={changeHandler}
-                    id='isVisible'
-                    checked={formData.isVisible}
-                    />
-                    <label htmlFor='isVisible'>Am i Visible hon?</label>
- 
-                    <br/>
-                    <br/>
-                    {/* Radio Buttons */}
-                    <input type='radio'
-                    name='mode'
-                    onChange={changeHandler}
-                    id='Offline-mode'
-                    value="Offline-mode"
-                    checked={formData.mode === "Offline-mode"}
-                    />
-                    {/* radio num2 */}
-                    <label htmlFor='Offline-mode'>Offline</label>
-                    <input type='radio'
-                    name='mode'
-                    onChange={changeHandler}
-                    id='Online-mode'
-                    value="Online-mode"
-                    checked={formData.mode === "Online-mode"}
-                    />
-                    <label htmlFor='Online-mode'>Online</label>
-                      <br/>
-                      <br/>
-                  {/* Dropdowns... */}
-                  <label htmlFor='favCar'>Tell me you fav Car bruh  </label>
-                  <select onChange={changeHandler} name='favCar' value={formData.favCar} id='favCar'>
-                         <option value="fortuner">fortuner</option>
-                         <option value="Thar">Thar</option>
-                         <option value="Range-rover">Range-rover</option>
-                         <option value="Mercedes">Mercedes</option>
-                  </select>
-
-                  <br/>
-                  <br/>
-                  <button>Submit</button>
-               </form>
-        </div>
+         {/* SImple Way of Creating Routes */}
+                {/* <Routes>
+                    <Route path='/' element={<div>HOme Page buddy </div>}/>
+                    <Route path='/about' element={<div>about Page buddy </div>}/>
+                    <Route path='/contact' element={<div>contect us  Page buddy </div>}/>
+                    <Route path='/labs' element={<div>labs Page buddy </div>}/>
+                    <Route path='*' element={<div>buddy YOu enter Some Wrong Shit man</div>}/>
+                </Routes> */}
+                {/* Nested Routing */}
+                <Routes>
+                    <Route path='/' element={<MainHeader/>}>
+                       <Route index element={<Home/>}/>
+                       <Route path='/about' element={<About/>}/>
+                       <Route path='/contact' element={<Contact/>}/>
+                       <Route path='/labs' element={<Labs/>}/>
+                       <Route path='*' element={<Notfound/>}/>
+                    </Route>
+                </Routes>
+         </div>
       )  
 }
