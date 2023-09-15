@@ -1,24 +1,18 @@
 import './App.css';
-import Navbar from './components/Navbar'
-import Dashboard from './components/Dashboard'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import { Route ,Routes } from 'react-router-dom';
-import Home from './components/Home';
-import { useState } from 'react';
-
+import Random from './component/Random.jsx'
+import Tag from './component/Tag'
 export default function App() {
-     const [login, setLogin ] = useState(false);
       return (
-         <div className='bg-sky-950 w-[100vw] h-[150vh] text-white'>
-              <Navbar login = {login} setLogin = {setLogin}/>
-              
-              <Routes>
-                  <Route path='/' element={<Home/>}/>
-                  <Route path='/login' element={<Login login = {login} setLogin = {setLogin}/>}/>
-                  <Route path='/signup' element={<Signup login = {login} setLogin = {setLogin}/>}/>
-                  <Route path='/dashboard' element={<Dashboard/>}/>
-              </Routes>
-         </div>
+        <div class="w-[100vw] h-auto bg-gradient-to-r from-blue-500 via-pink-500 to-yellow-500 bg-opacity-50 flex items-center flex-col">
+         <div className='bg-white p-2 mt-4 w-[80%] flex justify-center items-center text-3xl font-bold rounded-md'>
+         <h1>Random Gifs</h1></div>
+         
+         {/* Box1 */}
+         <Random/>
+         {/* Box2 */}
+         <Tag/>
+
+</div>  
+      
       )  
 }
