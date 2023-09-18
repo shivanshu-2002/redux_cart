@@ -7,7 +7,7 @@ const Pagination = () => {
   const { load, post } = useContext(AppContext);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mb-[50px]">
       {load ? (
         <Spinner />
       ) : post.length === 0 ? (
